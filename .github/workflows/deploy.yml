@@ -33,32 +33,13 @@ jobs:
       - name: Build web app
         env:
           PUBLIC_URL: /NorthsideExpress/
-          EXPO_PUBLIC_BASE_URL: /NorthsideExpress/
         run: |
           npx expo export --platform web
 
-      - name: Fix asset paths for GitHub Pages
+      - name: Fix for GitHub Pages
         run: |
-          # Create .nojekyll file
           touch dist/.nojekyll
-          
-          # Copy index.html to 404.html for SPA routing
           cp dist/index.html dist/404.html
-          
-          # Fix the asset paths in all HTML files
-          find dist -name "*.html" -exec sed -i 's|/_expo/|/NorthsideExpress/_expo/|g' {} \;
-          find dist -name "*.html" -exec sed -i 's|="/_expo/|="/NorthsideExpress/_expo/|g' {} \;
-          
-          # Fix any other asset paths
-          find dist -name "*.html" -exec sed -i 's|href="/|href="/NorthsideExpress/|g' {} \;
-          find dist -name "*.html" -exec sed -i 's|src="/|src="/NorthsideExpress/|g' {} \;
-
-      - name: List build files for debugging
-        run: |
-          echo "=== dist contents ==="
-          ls -la dist/
-          echo "=== dist/_expo contents ==="
-          ls -la dist/_expo/ || echo "No _expo folder"
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
