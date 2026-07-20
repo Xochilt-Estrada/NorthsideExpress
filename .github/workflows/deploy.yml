@@ -33,7 +33,19 @@ jobs:
       - name: Build web app
         run: |
           npx expo export --platform web
+
+      - name: Fix for GitHub Pages (SPA support)
+        run: |
+          # Create a .nojekyll file to bypass Jekyll processing
           touch dist/.nojekyll
+          
+          # Copy index.html to 404.html for SPA routing support
+          cp dist/index.html dist/404.html
+          
+          # Also create a copy at the root level
+          cp dist/index.html dist/index.html.bak
+          
+          echo "✅ Fixed for GitHub Pages SPA deployment!"
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
