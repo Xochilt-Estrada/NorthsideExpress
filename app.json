@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "MyCoffeeApp",
-    "slug": "mycoffeeapp",
+    "slug": "MyCoffeeApp",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -23,8 +23,7 @@
       "edgeToEdgeEnabled": true
     },
     "web": {
-      "favicon": "./assets/favicon.png",
-      "publicPath": "/NorthsideExpress/"
+      "favicon": "./assets/favicon.png"
     }
   }
 }
